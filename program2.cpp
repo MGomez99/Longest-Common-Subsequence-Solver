@@ -42,8 +42,8 @@ int main(int argc, char** argv){
     }
     string x = getInput(fx);
     string y = getInput(fy);
-    cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
+    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
+    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
 
 
     chrono::steady_clock::time_point t1 = chrono::steady_clock::now();

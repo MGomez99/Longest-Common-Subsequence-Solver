@@ -54,8 +54,8 @@ int main(int argc, char** argv){
     // Get input strings
     string x = getInput(fx);
     string y = getInput(fy);
-    cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
+    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
+    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
     //Set up table
     vector<int> row(y.length()+1, -1);
     row[0] = 0;

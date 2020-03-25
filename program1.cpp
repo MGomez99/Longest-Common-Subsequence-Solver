@@ -25,6 +25,29 @@ int LCS(string x, string y){
     }
     return table[x.length()][y.length()];
 }
+string getLCS(string x, string y){
+    string LCS;
+    int i = x.length();
+    int j = y.length();
+    while(i > 0 && j > 0){
+        //get temp strings
+        string x_temp = string(1, x[i-1]);
+        string y_temp = string(1, y[j-1]);
+        //check if same char
+        if(x_temp == y_temp){
+            //pre-pend 
+            LCS.insert(0, x_temp);
+            i--;
+            j--;
+        }
+        else if(table[i-1][j] > table[i][j-1]){
+            i--;
+        }
+        else j--;
+    }
+    return LCS;
+
+}
 
 int main(int argc, char** argv){
     //Get input strings
@@ -41,8 +64,8 @@ int main(int argc, char** argv){
     }
     string x = getInput(fx);
     string y = getInput(fy);
-    cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
+    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
+    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
     //Set up table
     vector<int> row(y.length()+1, -1);
     row[0] = 0;
@@ -56,21 +79,25 @@ int main(int argc, char** argv){
     chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
     chrono::nanoseconds time_taken = chrono::duration_cast<chrono::nanoseconds>(t2-t1);
     string timed = to_string(time_taken.count())+ " nanoseconds";
-    
+    string lcs = "";
+    if(x.length() <= 10 && y.length() <= 10) lcs = getLCS(x, y);
     //Write to file
     ofstream fp;
     fp.open(fo);
     if(x.length() <= 10 && y.length() <= 10){
         for(int i = 0; i < table.size(); i++){
             string line;
-            for(int j = 0; j< y.length(); j++){
-                if(j != y.length()-1) line.append(to_string(table[i][j]) + " ");
+            for(int j = 0; j<= y.length(); j++){
+                if(j != y.length()) line.append(to_string(table[i][j]) + " ");
                 else line.append(to_string(table[i][j]));
             }
             fp << line << endl;
         }
+        fp << lcs << endl;
     }
-    fp << LCS_Length<<endl;
+    else{
+        fp << LCS_Length<<endl;
+    }
     fp << timed << endl;
     fp.close();
 }
