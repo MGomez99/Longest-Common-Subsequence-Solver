@@ -6,7 +6,7 @@ Top-Down DP Approach with memoization
 vector<vector<int>> table; 
 
 int LCS(string x, string y, int x_char, int y_char){
-    
+    //Get the length of the longest common subsequence using top down  dynamic programming
     //x_char and y_char are the # of characters we are considering within the respective string
     // In all cases we save the result
     
@@ -54,19 +54,17 @@ int main(int argc, char** argv){
     // Get input strings
     string x = getInput(fx);
     string y = getInput(fy);
-    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
-    //Set up table
+
+    //Set up table (values have -1 if they haven't been initialized)
     vector<int> row(y.length()+1, -1);
     row[0] = 0;
     vector<vector<int>> matrix(x.length()+1, row);
     vector<int> row1(y.length()+1, 0);
     matrix[0] = row1;
     table = matrix;    
-    //Compute LCS
+    //Compute LCS and time it
     chrono::steady_clock::time_point t1 = chrono::steady_clock::now();
     int LCS_Length = LCS(x, y, x.length(), y.length());
-
     chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
     chrono::nanoseconds time_taken = chrono::duration_cast<chrono::nanoseconds>(t2-t1);
     string timed = to_string(time_taken.count())+ " nanoseconds";

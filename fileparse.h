@@ -13,6 +13,7 @@ using namespace std;
 #define FILE1 "filex.txt"
 #define FILE2 "filey.txt"
 string getInput(string file){
+    //reads file to get the string located on the first line
     ifstream infile(file);
     if(infile.good()){
         string line;

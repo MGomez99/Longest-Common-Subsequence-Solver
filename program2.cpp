@@ -42,19 +42,18 @@ int main(int argc, char** argv){
     }
     string x = getInput(fx);
     string y = getInput(fy);
-    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
 
 
+    //compute LCS and time it
     chrono::steady_clock::time_point t1 = chrono::steady_clock::now();
     int LCS_Length = LCS(x, y);
     chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
     chrono::nanoseconds time_taken = chrono::duration_cast<chrono::nanoseconds>(t2-t1);
     string timed = to_string(time_taken.count())+ " nanoseconds";
 
+    //Write to file
     ofstream fp;
     fp.open(fo);
-    //Write to file
     fp << LCS_Length<<endl;
     fp << timed << endl;
     fp.close();

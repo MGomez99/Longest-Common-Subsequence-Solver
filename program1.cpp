@@ -7,6 +7,7 @@ vector<vector<int>> table;
 
 
 int LCS(string x, string y){
+    //Get the length of the longest common subsequence using bottom-up dynamic programming to fill the table
     for(int i = 0; i <= x.length(); i++){
         for(int j = 0; j <= y.length(); j++){
             //Base Case
@@ -26,6 +27,11 @@ int LCS(string x, string y){
     return table[x.length()][y.length()];
 }
 string getLCS(string x, string y){
+    //Easiest way to read the table
+    //i and j are positions in the string + can be used to navigate the table
+    //LCS is the return string
+    //Recall that Table is of size x.length()+1 by y.length()+1
+    //
     string LCS;
     int i = x.length();
     int j = y.length();
@@ -35,7 +41,7 @@ string getLCS(string x, string y){
         string y_temp = string(1, y[j-1]);
         //check if same char
         if(x_temp == y_temp){
-            //pre-pend 
+            //pre-pend character
             LCS.insert(0, x_temp);
             i--;
             j--;
@@ -64,8 +70,7 @@ int main(int argc, char** argv){
     }
     string x = getInput(fx);
     string y = getInput(fy);
-    //cout << "String x: " << x << "\t Length: "<<x.length()<<endl; //@TODO remove
-    //cout << "String y: " << y << "\t Length: "<<y.length()<<endl;
+
     //Set up table
     vector<int> row(y.length()+1, -1);
     row[0] = 0;
@@ -81,9 +86,11 @@ int main(int argc, char** argv){
     string timed = to_string(time_taken.count())+ " nanoseconds";
     string lcs = "";
     if(x.length() <= 10 && y.length() <= 10) lcs = getLCS(x, y);
+
     //Write to file
     ofstream fp;
     fp.open(fo);
+    //Only print the matrix + lcs string if input strings are both <= 10 characters
     if(x.length() <= 10 && y.length() <= 10){
         for(int i = 0; i < table.size(); i++){
             string line;

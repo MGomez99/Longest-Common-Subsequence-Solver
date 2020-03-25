@@ -7,6 +7,9 @@ all: $(files)
 
 clean:
 	rm -rf output*.txt
+	rm -rf program1
+	rm -rf program2
+	rm -rf program3
 
 run: all
 	./program1 filex.txt filey.txt output1.txt
